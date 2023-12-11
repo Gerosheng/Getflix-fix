@@ -8,6 +8,10 @@ const movieSchema = new mongoose.Schema({
   poster_path: String,
   vote_average: Number,
   trailerkey: String,
+  comments:[{
+    type: mongoose.SchemaTypes.ObjectId, 
+    ref: 'Comment'
+  }],
 })
 
 const MovieModel = mongoose.model('Movie', movieSchema)
