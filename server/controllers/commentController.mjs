@@ -1,45 +1,109 @@
 import { commentValidation } from "../validations/commentValidation.mjs";
 import Comment from "../models/commentModel.mjs";
+import MovieModel from "../models/moviemodel.mjs";
+import TvShowModel from "../models/tvmodel.mjs";
 import { parseError } from "../util/helpers.mjs";
+import responseHandler from "../util/handlers/responseHandlers.mjs"
 import sanitize from 'sanitize-html';
 
-export const submitComment = async (req, res) => {
+const createComment = async (req, res) => {
+    const { content, user } = req.body;
+    const entityId = req.params.entityId;
+    const entityType = req.params.entityType;
+
     try {
-        const {
-            text,
-            user_id,
-
-        } = req.body;
-
         await commentValidation.validateAsync({
             text,
         });
 
-        const newComment = new Comment({
-            text,
-            user_id,
+        const sanitizedContent = sanitize(content);
+
+        let entity;
+        if (entityType === 'MovieModel'){
+            entity = await MovieModel.findById(entityId);
+        } else if (entityType === 'TvShowModel') {
+            entity = await TvShowModel.findById(entityId);
+        }
+
+        if (!entity) {
+            return responseHandler.notFound(res);
+        }
+
+        const comment = new Comment({
+            content: sanitizedContent,
+            user,
+            entity: entityId,
+            onModel: entityType,
         });
 
-        
+        await comment.save();
 
-        res.send(newComment);
+        entity.comments.push(comment);
+
+        await entity.save();
+
+        responseHandler.created(res);
+        
     } catch (error){ 
-        res.status(400).send(parseError(err));
+        responseHandler.valError(res, parseError);
     };
 }; 
 
-export const deleteComment = async (req, res) => {
+const getComments = async (req, res) => {
+    const entityId = req.params.entityId;
+    const entityType = req.params.entityType;
+
     try {
-        const commentId = req.params.id;
+        const comments = await Comment.find({ entity: entityId, onModel: entityType })
+            .populate('user', 'username')
+            .exec();
+
+        responseHandler.ok(res, comments);
+    } catch (err) {
+        responseHandler.error(res);
+    }
+};
+
+const updateComment = async (req, res) => {
+    const commentId = req.params.commentId;
+    const { content } = req.body;
+
+    try {
+        const updatedComment = await Comment.findByIdAndUpdate(
+            commentId,
+            { content },
+            { new: true }
+        );
+
+        if (!updateComment) {
+            return responseHandler.notFound(res);
+        }
+
+        responseHandler.ok(res, updateComment);
+    } catch (err) {
+        responseHandler.error(res);
+    }
+};
+
+const deleteComment = async (req, res) => {
+    try {
+        const commentId = req.params.commentId;
 
         const deletedComment = await Comment.findByIdAndDelete(commentId);
 
         if (!deletedComment) {
-            return res.status(404).json({ error: 'Comment not found' });
+            return responseHandler.notFound(res);
         }
 
-        res.status(200).json({ message: 'Comment deleted successfully' });   
+        responseHandler.ok(res, deletedComment);   
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });    };
+        responseHandler.error(res);
+    }
+}
+
+export default {
+    createComment,
+    getComments,
+    updateComment,
+    deleteComment,
 }
