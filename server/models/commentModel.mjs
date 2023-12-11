@@ -10,10 +10,14 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    movie: { 
+    entity: { 
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Movie',
+        refPath: 'onModel',
         required: true
+    },
+    onModel: {
+        type: String,
+        enum: ['MovieModel', 'TvShowModel']
     },
     timestamp: {
         type: Date,
