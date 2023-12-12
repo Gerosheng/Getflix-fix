@@ -34,7 +34,7 @@ const signup = async (req, res) => {
     };
 };
 
-const updateUser = async (req, res) => {
+const updateUserInfo = async (req, res) => {
     try{
         const { firstname, lastname, email, password } = req.body;
 
@@ -90,7 +90,7 @@ const deactivateAccount = async (req, res) => {
             }
         );
 
-        if (updateResult.nModified === 1) {
+        if (updateResult.nModified >= 1) {
             return responseHandler.ok(res);
         } else {
             return responseHandler.notFound(res);
@@ -103,6 +103,6 @@ const deactivateAccount = async (req, res) => {
 export {
     signup,
     getUserInfo,
-    updateUser,
+    updateUserInfo,
     deactivateAccount
 }
