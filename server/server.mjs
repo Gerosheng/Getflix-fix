@@ -11,6 +11,7 @@ import {
   homepageRoutes,
   tvShowsRoutes,
   authRoutes,
+  commentRoutes,
 } from './routes/index.mjs'
 
 const PORT = process.env.PORT || 5050
@@ -37,9 +38,7 @@ apiRouter.use('/users', userRoutes)
 apiRouter.use('/password', passwordRoutes)
 apiRouter.use('/auth', authRoutes);
 apiRouter.use('/password', passwordRoutes);
-
-
-// apiRouter.use('/comment', commentRoutes)
+apiRouter.use('/comment', commentRoutes)
 
 // start the Express server
 app.listen(PORT, () => {

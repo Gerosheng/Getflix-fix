@@ -1,5 +1,5 @@
 import axios from 'axios'
-import TvShowModel from '/Users/32485/becode/Get-Flix/server/models/tvmodel.mjs'
+import TvShowModel from '../../models/tvmodel.mjs'
 
 const apiKey = '1cc614b6cd01c73622141ccf0bdceac5'
 

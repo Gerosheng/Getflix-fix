@@ -1,5 +1,5 @@
 import axios from 'axios'
-import MovieModel from '/Users/32485/becode/Get-Flix/server/models/moviemodel.mjs'
+import MovieModel from '../../models/moviemodel.mjs'
 
 const apiKey = '1cc614b6cd01c73622141ccf0bdceac5'
 
