@@ -75,11 +75,11 @@ const updateComment = async (req, res) => {
             { new: true }
         );
 
-        if (!updateComment) {
+        if (!updatedComment) {
             return responseHandler.notFound(res);
         }
 
-        responseHandler.ok(res, updateComment);
+        responseHandler.ok(res, updatedComment);
     } catch (err) {
         responseHandler.error(res);
     }
