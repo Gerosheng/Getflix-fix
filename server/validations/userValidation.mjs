@@ -40,3 +40,7 @@ export const infoUpdateValidation = Joi.object({
   email,
   password,
 })
+
+export const emailValidation = Joi.object({ email });
+
+export const passwordResetValidation = Joi.object({ password });
