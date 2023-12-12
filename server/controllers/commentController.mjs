@@ -7,13 +7,14 @@ import responseHandler from "../util/handlers/responseHandlers.mjs"
 import sanitize from 'sanitize-html';
 
 const createComment = async (req, res) => {
-    const { content, user } = req.body;
+    const { content } = req.body;
+    const user = req.user;
     const entityId = req.params.entityId;
     const entityType = req.params.entityType;
 
     try {
         await commentValidation.validateAsync({
-            text,
+            content
         });
 
         const sanitizedContent = sanitize(content);
@@ -31,7 +32,7 @@ const createComment = async (req, res) => {
 
         const comment = new Comment({
             content: sanitizedContent,
-            user,
+            userId: user,
             entity: entityId,
             onModel: entityType,
         });
@@ -55,8 +56,7 @@ const getComments = async (req, res) => {
 
     try {
         const comments = await Comment.find({ entity: entityId, onModel: entityType })
-            .populate('user', 'username')
-            .exec();
+            .populate('userId', 'firstname email')
 
         responseHandler.ok(res, comments);
     } catch (err) {

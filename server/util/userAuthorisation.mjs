@@ -1,9 +1,9 @@
 import responseHandler from './handlers/responseHandlers.mjs';
 
 const userAuthorisation = (auhtorizedRole) => (req, res, next) => {
-    const userRoles = req.user.roles;
+    const userRole = req.user.role;
 
-    if (userRoles.includes(auhtorizedRole)) {
+    if (userRole.includes(auhtorizedRole)) {
         next();
     } else {
         responseHandler.forbidden(res);

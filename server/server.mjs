@@ -4,6 +4,7 @@ import 'dotenv/config'
 import mongoose from 'mongoose'
 import './db/conn.mjs'
 import connectDB from './db/connmovie.mjs'
+import cookieParser from 'cookie-parser'
 import {
   userRoutes,
   passwordRoutes,
@@ -18,12 +19,12 @@ const PORT = process.env.PORT || 5050
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const app = express()
 
+app.use(cookieParser());
 app.use(cors({
-  origin: ["http://localhost:5173"],
+  origin: ['*'/**"http://localhost:5173"*/],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 

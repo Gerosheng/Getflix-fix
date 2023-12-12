@@ -19,7 +19,7 @@ const login = async (req, res) => {
             res.cookie('jwt', accessToken, {
                 //sameSite: "None",
                 withCredentials: true,
-                httpOnly: false, //for dev purposes change to true for prod
+                httpOnly: true, //for dev purposes change to true for prod
                 maxAge: 2 * 60 * 60 * 1000 //cookie expiry: set to match aT (2Hours)
             })
 
