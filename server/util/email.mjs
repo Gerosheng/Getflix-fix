@@ -8,9 +8,9 @@ export const transporter = nodemailer.createTransport({
   },
 })
 
-export const resetMailOptions = (to, resetLink) => ({
+export const resetMailOptions = (to, link) => ({
   from: 'getflix@gmail.com',
   to,
   subject: 'Password Reset',
-  text: `Click on the following link to reset your password: ${resetLink}`,
+  text: `Click on the following link to reset your password: <a href="${link}">${link}</a>`,
 })
