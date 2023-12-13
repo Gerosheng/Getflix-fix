@@ -201,6 +201,7 @@ const Welcome: React.FC = () => {
      Watch the way you want
 Enjoy the world's greatest stories - anytime, anywhere.
           </h1>
+          <br />
           <Link to='/signup'> <button> GET STARTED</button>
                    </Link>
           <hr />
@@ -316,9 +317,11 @@ Select Your Plan
 <h3> No hidden fees, equipment rentals, or installation appointments.
 Switch plans or cancel anytime.**</h3>
           </h1>
+          <br />
           <Link to='/signup'> <button> Join Now</button>
-                   </Link>
+                   </Link> 
           <hr />
+          <br />
           </div>
 
 
