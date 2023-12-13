@@ -5,6 +5,7 @@ import movieRoutes from './movie.mjs'
 import homepageRoutes from './homepage.mjs'
 import tvShowsRoutes from './tvshows.mjs'
 import commentRoutes from './commentRoutes.mjs'
+import contactRoutes from './contactRoutes.mjs';
 
 export {
   userRoutes,
@@ -13,5 +14,6 @@ export {
   homepageRoutes,
   tvShowsRoutes,
   authRoutes ,
-  commentRoutes
+  commentRoutes,
+  contactRoutes
 }

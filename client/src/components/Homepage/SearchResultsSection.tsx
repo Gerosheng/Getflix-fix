@@ -7,7 +7,7 @@ const SearchResultsSection = () => {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [error, setError] = useState(null)
-
+// change fetch route
   const handleSearch = async () => {
     try {
       const response = await axios.get(
