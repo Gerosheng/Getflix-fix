@@ -6,6 +6,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/react-slick": "^0.23.12",
     "concurrently": "^8.2.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",

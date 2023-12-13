@@ -4,6 +4,7 @@ import Slider from 'react-slick'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import './carousel.css'
 
 interface Movie {
   title: string
@@ -62,7 +63,7 @@ const Movies: React.FC = () => {
 
   const sliderSettings = {
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
     speed: 1500,
