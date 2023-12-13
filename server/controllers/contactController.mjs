@@ -54,8 +54,8 @@ const deleteContactMessage = async (req, res) => {
     }
 };
 
-export default {
+export {
     submitContactForm,
     getContactMessages,
-    deleteContactMessage
+    deleteContactMessage,
 }
