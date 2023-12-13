@@ -1,5 +1,5 @@
 import React from 'react'
-import './Password.scss'
+import './Password.css'
 const PasswordPage: React.FC = () => {
   return (
     <div className="container mt-5 bg-danger">

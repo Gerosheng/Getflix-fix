@@ -1,22 +1,49 @@
 import React, { useState } from 'react'
-import './Profile.scss'
+import './Profile.css'
 
 const ProfilePage: React.FC = () => {
   const [profilePicture, setProfilePicture] = useState<string | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
+
     if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setProfilePicture(reader.result as string)
+      const maxSizeInPixels = 150
+      const image = new Image()
+
+      image.onload = () => {
+        if (image.width > maxSizeInPixels || image.height > maxSizeInPixels) {
+          const canvas = document.createElement('canvas')
+          const context = canvas.getContext('2d')!
+
+          const aspectRatio = image.width / image.height
+
+          if (image.width > image.height) {
+            canvas.width = maxSizeInPixels
+            canvas.height = maxSizeInPixels / aspectRatio
+          } else {
+            canvas.width = maxSizeInPixels * aspectRatio
+            canvas.height = maxSizeInPixels
+          }
+
+          context.drawImage(image, 0, 0, canvas.width, canvas.height)
+          const resizedDataURL = canvas.toDataURL('image/jpeg')
+
+          setProfilePicture(resizedDataURL)
+          setErrorMessage(null)
+        } else {
+          setProfilePicture(URL.createObjectURL(file))
+          setErrorMessage(null)
+        }
       }
-      reader.readAsDataURL(file)
+
+      image.src = URL.createObjectURL(file)
     }
   }
 
   return (
-    <div>
+    <div className="profile-container">
       <header>
         <h1>User Profile</h1>
       </header>
@@ -33,6 +60,7 @@ const ProfilePage: React.FC = () => {
             onChange={handleFileChange}
           />
         </label>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <h2>John Doe</h2>
         <p>Email: john.doe@example.com</p>
         <p>Location: City, Country</p>

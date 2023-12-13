@@ -1,0 +1,65 @@
+/* carousel.css */
+
+/* Optional: Style for the container of your carousel */
+.carousel-container {
+  margin: 0px;
+}
+
+/* Style for each slide/item in the carousel */
+.slick-slide {
+  margin: 0 10px;
+}
+
+/* Style for the title of each movie */
+.slick-slide p {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Style for the movie poster image */
+.slick-slide img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the navigation arrows */
+.slick-prev,
+.slick-next {
+  font-size: 24px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.slick-prev {
+  left: -40px;
+}
+
+.slick-next {
+  right: -40px;
+}
+
+/* Style for the dots at the bottom of the carousel */
+.slick-dots {
+  bottom: 10px;
+}
+
+.slick-dots li button {
+  font-size: 12px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+}
+
+.slick-dots li.slick-active button {
+  background-color: #0056b3;
+}

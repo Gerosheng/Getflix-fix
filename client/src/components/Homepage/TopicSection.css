@@ -1,0 +1,12 @@
+/* CSS pour définir une hauteur fixe pour toutes les images */
+.custom-block-image {
+    height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
+    object-fit: cover; /* Assure que l'image couvre la hauteur fixe sans déformer */
+  }
+  
+  /* Ajoutez une classe spécifique pour chacun des conteneurs parent pour définir une largeur fixe */
+  .custom-block {
+    width: 100%; /* Ajustez la largeur en fonction de vos besoins */
+    overflow: hidden; /* Assure que l'image ne dépasse pas les bords du conteneur */
+  }
+  

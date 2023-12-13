@@ -1,4 +1,82 @@
-footer {
-  height: -moz-fit-content;
-  height: fit-content;
-}/*# sourceMappingURL=Footer.css.map */
+.site-footer {
+  background-image: url('../images/templatemo-wave-footer.jpg'),
+    linear-gradient(#ffffff, #348cd2);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.site-footer > .container {
+  position: relative;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.site-footer-title,
+.site-footer p {
+  color: var(--white-color);
+}
+
+.site-footer p strong {
+  font-family: var(--title-font-family);
+}
+
+.site-footer p a {
+  color: var(--white-color);
+  border-bottom: 1px solid;
+  padding-bottom: 3px;
+}
+
+.site-footer p a:hover {
+  color: var(--secondary-color);
+}
+
+.site-footer-thumb a img {
+  display: block;
+  width: 120px;
+  min-width: 120px;
+  height: auto;
+}
+
+.site-footer-links {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.site-footer-link-item {
+  display: inline-block;
+  list-style: none;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: rgb(231, 231, 215);
+}
+
+.site-footer-link {
+  color: var(--white-color);
+  font-size: var(--p-font-size);
+  line-height: inherit;
+}
+
+@media screen and (min-width: 1600px) {
+  .site-footer {
+    padding-top: 10px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .site-footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .site-footer {
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+  }
+}

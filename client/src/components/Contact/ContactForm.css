@@ -1,1 +1,23 @@
-/*# sourceMappingURL=ContactForm.css.map */
+.contact-info p strong {
+  font-family: var(--title-font-family);
+  min-width: 90px;
+}
+
+.contact-info p a {
+  color: var(--p-color);
+  border-bottom: 1px solid;
+  padding-bottom: 3px;
+}
+
+.contact-info p a:hover {
+  color: var(--secondary-color);
+}
+
+.google-map {
+  border-radius: var(--border-radius-medium);
+}
+
+.contact-form .form-floating > textarea {
+  border-radius: var(--border-radius-medium);
+  height: 150px;
+}

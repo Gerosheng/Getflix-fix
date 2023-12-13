@@ -1,5 +1,6 @@
 import React from 'react'
-
+import './TopicSection.css'
+import './TopicsSection.css'
 const TopicsSection: React.FC = () => {
   return (
     <section className="topics-section section-padding pb-0" id="section_3">
@@ -7,7 +8,7 @@ const TopicsSection: React.FC = () => {
         <div className="row">
           <div className="col-lg-12 col-12">
             <div className="section-title-wrap mb-5">
-              <h4 className="section-title">Topics</h4>
+            
             </div>
           </div>
 
@@ -15,7 +16,7 @@ const TopicsSection: React.FC = () => {
             <div className="custom-block custom-block-overlay">
               <a href="detail-page.html" className="custom-block-image-wrap">
                 <img
-                  src="images/topics/physician-consulting-his-patient-clinic.jpg"
+                  src="images/comedy2.avif"
                   className="custom-block-image img-fluid"
                   alt="Physician consulting his patient in a clinic"
                 />
@@ -23,9 +24,9 @@ const TopicsSection: React.FC = () => {
 
               <div className="custom-block-info custom-block-overlay-info">
                 <h5 className="mb-1">
-                  <a href="listing-page.html">Productivity</a>
+                  <a href="listing-page.html"></a>
                 </h5>
-                <p className="badge mb-0">50 Episodes</p>
+              
               </div>
             </div>
           </div>
@@ -42,9 +43,9 @@ const TopicsSection: React.FC = () => {
 
               <div className="custom-block-info custom-block-overlay-info">
                 <h5 className="mb-1">
-                  <a href="listing-page.html">Technician</a>
+             
                 </h5>
-                <p className="badge mb-0">12 Episodes</p>
+               
               </div>
             </div>
           </div>
@@ -53,7 +54,7 @@ const TopicsSection: React.FC = () => {
             <div className="custom-block custom-block-overlay">
               <a href="detail-page.html" className="custom-block-image-wrap">
                 <img
-                  src="images/topics/woman-practicing-yoga-mat-home.jpg"
+                  src="images/spiderman.webp"
                   className="custom-block-image img-fluid"
                   alt="Woman practicing yoga at home"
                 />
@@ -61,9 +62,9 @@ const TopicsSection: React.FC = () => {
 
               <div className="custom-block-info custom-block-overlay-info">
                 <h5 className="mb-1">
-                  <a href="listing-page.html">Mindfulness</a>
+                
                 </h5>
-                <p className="badge mb-0">35 Episodes</p>
+              
               </div>
             </div>
           </div>
@@ -80,9 +81,9 @@ const TopicsSection: React.FC = () => {
 
               <div className="custom-block-info custom-block-overlay-info">
                 <h5 className="mb-1">
-                  <a href="listing-page.html">Cooking</a>
+               
                 </h5>
-                <p className="badge mb-0">12 Episodes</p>
+               
               </div>
             </div>
           </div>

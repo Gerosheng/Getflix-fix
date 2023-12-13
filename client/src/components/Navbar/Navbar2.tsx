@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-const Navbar: React.FC = () => {
+const Navbar2: React.FC = () => {
   return (
     <>
       <div>
@@ -125,4 +125,4 @@ const Navbar: React.FC = () => {
     </>
   )
 }
-export default Navbar
+export default Navbar2

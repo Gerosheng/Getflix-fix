@@ -10,9 +10,10 @@ const HomePage: React.FC = () => {
   <>
  
       <SearchResultsSection />
-      <HeroSection />
+       <TopicsSection />
+        <HeroSection />
       <LatestPodcastSection />
-      <TopicsSection />
+    
       <TrendingPodcastSection />
   </>
   
