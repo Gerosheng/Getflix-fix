@@ -1,36 +1,11 @@
 import express from 'express'
 import axios from 'axios'
-import { filterByGenres, filterByYear } from './movieFilter.mjs'
+import { searchmovie } from './search/searchmovie.mjs'
+import MovieModel from '../models/moviemodel.mjs'
 
 const movieRoutes = express.Router()
 
 const apiKey = '1cc614b6cd01c73622141ccf0bdceac5'
-
-movieRoutes.get('/comedy', async (req, res) => {
-  try {
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=35`,
-    )
-    const comedyMovies = response.data.results
-    res.json(comedyMovies)
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: 'Internal Server Error' })
-  }
-})
-
-movieRoutes.get('/action', async (req, res) => {
-  try {
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28`,
-    )
-    const actionMovies = response.data.results
-    res.json(actionMovies)
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: 'Internal Server Error' })
-  }
-})
 
 movieRoutes.get('/latest', async (req, res) => {
   try {
@@ -38,7 +13,30 @@ movieRoutes.get('/latest', async (req, res) => {
       `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`,
     )
     const latestMovies = response.data.results
+
+    await MovieModel.deleteMany({ latest: true })
+    await MovieModel.insertMany(
+      latestMovies.map((movie) => ({ ...movie, latest: true })),
+    )
+
     res.json(latestMovies)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+movieRoutes.get('/popular', async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`,
+    )
+    const popularMovies = response.data.results
+
+    await MovieModel.deleteMany({ popular: true }) // Clear existing popular movie data
+    await MovieModel.insertMany(
+      popularMovies.map((movie) => ({ ...movie, popular: true })),
+    )
+    res.json(popularMovies)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Internal Server Error' })
@@ -51,6 +49,11 @@ movieRoutes.get('/upcoming', async (req, res) => {
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}`,
     )
     const upcomingMovies = response.data.results
+    await MovieModel.deleteMany({ upcoming: true })
+    await MovieModel.insertMany(
+      upcomingMovies.map((movie) => ({ ...movie, upcoming: true })),
+    )
+
     res.json(upcomingMovies)
   } catch (error) {
     console.error(error)
@@ -58,22 +61,51 @@ movieRoutes.get('/upcoming', async (req, res) => {
   }
 })
 
-movieRoutes.get('/genre/:genreId', async (req, res) => {
-  const { genreId } = req.params
+movieRoutes.get('/searchmovie/:query', async (req, res) => {
+  const { query } = req.params
   try {
-    const movies = await filterByGenres(genreId)
+    const movies = await searchmovie(query)
     res.json(movies)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 })
-movieRoutes.get('/year/:year', async (req, res) => {
-  const { year } = req.params
+
+movieRoutes.get('/moviedetails/:id', async (req, res) => {
+  const { id } = req.params
   try {
-    const movies = await filterByYear(year)
-    res.json(movies)
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&append_to_response=videos`,
+    )
+    const movieDetails = response.data
+
+    const {
+      title,
+      overview: synopsis,
+      release_date: releaseDate,
+      genres,
+      vote_average: tmdbRating,
+      videos,
+    } = movieDetails
+
+    const genresString = genres.map((genre) => genre.name).join(', ')
+
+    const trailerKey = videos.results.length > 0 ? videos.results[0].key : null
+    const detailsToSend = {
+      title,
+      synopsis,
+      releaseDate,
+      genres: genresString,
+      tmdbRating,
+      trailerKey,
+    }
+
+    await MovieModel.findByIdAndUpdate(id, { trailerKey })
+
+    res.json(detailsToSend)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error(error)
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 })
 

@@ -41,6 +41,10 @@ const UserSchema = new mongoose.Schema(
       enum: ['visitor', 'registrant', 'subscriber', 'admin'],
       default: 'visitor',
     },
+    isActive: {
+      type: Boolean,
+      default: true
+    },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
   },

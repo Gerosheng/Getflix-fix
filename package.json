@@ -14,7 +14,7 @@
     "vite-plugin-style-import": "^2.0.0"
   },
   "scripts": {
-    "dev": "concurrently \"cd server && nodemon server.mjs\" \"cd client && npm run dev\" \"cd client && npm run sass\"",
+    "dev": "concurrently \"cd server && nodemon server.mjs\" \"cd client && npm run dev\"", 
     "dev-client": "concurrently \"cd client && npm run dev\" \"cd client && npm run sass\""
   },
   "dependencies": {
