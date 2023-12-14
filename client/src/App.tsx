@@ -26,19 +26,19 @@ const App = () => {
 
 const Layout = () => {
   const location = useLocation();
-
+  const showNavbar = !["/", "/login", "/signup", "/password-recovery"].includes(location.pathname);
   return (
     <>
-      {location.pathname !== "/" && <Navbar />}
+      {showNavbar && <Navbar />}
       <Routes>
-        <Route path="homepage" element={<HomePage />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="Profile" element={<ProfilePage />} />
-        <Route path="password-recovery/" element={<PasswordPage />} />
-        <Route path="Contact" element={<ContactForm />} />
-        <Route path="movies" element={<Movies />} />
-        <Route path="series" element={<Series />} />
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/Profile" element={<ProfilePage />} />
+        <Route path="/password-recovery" element={<PasswordPage />} />
+        <Route path="/Contact" element={<ContactForm />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/series" element={<Series />} />
       </Routes>
     </>
   )

@@ -11,4 +11,5 @@ commentRoutes.get('/:entityType/:entityId/get', getComments);
 commentRoutes.put('/update/:commentId', userAuthenticate, isCommentOwnerOrAdmin, updateComment);
 commentRoutes.delete('/delete/:commentId', userAuthenticate, isCommentOwnerOrAdmin, deleteComment );
 
+
 export default commentRoutes;
