@@ -8,5 +8,6 @@ const message= Joi.string().min(3).max(500).required()
 export const contactFormValidation = Joi.object({
     firstname,
     lastname,
-    email
+    email,
+    message
 })

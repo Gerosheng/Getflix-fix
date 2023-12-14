@@ -6,24 +6,26 @@ import { contactFormValidation } from "../validations/contactFormValidation.mjs"
 
 const submitContactForm = async (req, res) => {
     try {
-        const { firstname, lastname, email, message } = req.body;
-
+        const { firstname, lastname, email, subject, message } = req.body;
+        console.log({ firstname, lastname, email, subject, message })
         await contactFormValidation.validateAsync({ firstname, lastname, email, message });
 
         const sanitizedMessage = sanitize(message);
+        console.log(sanitizedMessage)
 
         const contact = new Contact({
             firstname: firstname,
             lastname: lastname,
             email: email,
+            subject: subject,
             message: sanitizedMessage
         });
-
+        console.log(contact)
         await contact.save();
 
         responseHandler.created(res, contact)
     } catch (err) {
-        responseHandler.valError(res, parseError)
+        responseHandler.error(res, parseError)
     }
 };
 

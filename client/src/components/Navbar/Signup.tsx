@@ -14,7 +14,7 @@ const Signup: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5050/api/users')
+        const response = await fetch('http://localhost:5050/api/users/s')
         const result = await response.json()
         setData(result)
       } catch (error) {

@@ -38,7 +38,7 @@ const SearchResultsSection = () => {
           <h2>Search Results:</h2>
           <ul>
             {results.map((result) => (
-              <li key={result.id}>{result.title || result.name}</li>
+              <li key={result.id}>{result.title || result.name}<img src={`https://image.tmdb.org/t/p/w500${result.poster_path}`}/></li>
             ))}
           </ul>
         </div>
