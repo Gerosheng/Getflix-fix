@@ -38,4 +38,39 @@ const userAuthenticate = async (req, res, next) => {
     }
 };
 
-export default userAuthenticate;
+const getUserAuth = async (req, res) => {
+    
+    const token = req.cookies && req.cookies.jwt;
+    
+    if (!token) {
+        return responseHandler.unauthorize(res, "No authentication token provided");
+    }
+    
+    try {    
+        const decodedToken = jwt.verify(
+            token,
+            process.env.ACCESS_TOKEN_KEY
+        );
+
+        if (!decodedToken) {
+            return responseHandler.unauthorize(res, 'Invalid authentication token');
+        }
+        const verifiedUser = await User.findById(decodedToken.data.id);
+
+        if(!verifiedUser) {
+           return responseHandler.notFound(res);
+        };
+
+        req.user = verifiedUser;
+
+        if (!verifiedUser.isActive) {
+            return responseHandler.unauthorize(res, 'Account is not active');
+        }        
+        responseHandler.ok(res, verifiedUser);
+
+    } catch (error) {
+        responseHandler.unauthorize(res, "Error during authentication");
+    }
+};
+
+export default {userAuthenticate, getUserAuth};

@@ -1,23 +1,33 @@
-import React, { createContext, useContext, useState, FC, ReactNode } from 'react';
+import React, { createContext, useContext, useState, FC, ReactNode, useEffect } from 'react';
 
 interface AuthContextProps {
-    authToken: boolean;
-    settingToken: () => string;
-    logout: () => void;
+    isAuth: Boolean;
+    getAuth: () => void;
   }
 
   const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [authToken, setauthToken] = useState(localStorage.getItem("jwt"));
+  const [isAuth, setisAuth] = useState(false);
 
-  const settingToken = (newToken:string) => {
-    setauthToken(newToken);
+  const getAuth = async () => {
+    try {
+      const response = await fetch('http://localhost:5050/api/auth/getauth', {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const result = await response.json();
+      if (result.ok){
+        setisAuth(true)
+      }
+      setisAuth(false);
+    } catch (error){
+      console.error('Error fetching auth:', error)
+    }
   };
-
-
+  
   return (
-    <AuthContext.Provider value={{ authToken, settingToken, }}>
+    <AuthContext.Provider value={{ isAuth, getAuth, }}>
       {children}
     </AuthContext.Provider>
   );
