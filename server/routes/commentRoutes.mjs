@@ -1,6 +1,6 @@
 import express from 'express';
 import { createComment, getComments, updateComment, deleteComment }  from '../controllers/commentController.mjs'
-import userAuthenticate from '../util/userAuthenticate.mjs';
+import { userAuthenticate } from '../util/userAuthenticate.mjs';
 import userAuthorisation from '../util/userAuthorisation.mjs';
 import isCommentOwnerOrAdmin from '../util/commentOwner.mjs';
 

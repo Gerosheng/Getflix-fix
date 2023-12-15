@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 import './Signup.css'
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -8,13 +9,13 @@ const Signup: React.FC = () => {
     email: '',
     password: '',
   })
-
+  const navigate = useNavigate();
   const [data, setData] = useState<any>(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5050/api/users/s')
+        const response = await fetch('http://localhost:5050/api/users/signup')
         const result = await response.json()
         setData(result)
       } catch (error) {
@@ -23,29 +24,35 @@ const Signup: React.FC = () => {
     }
 
     fetchData()
-  }, [])
+  }, []) 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
+    console.log(formData)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log('Request Payload:', JSON.stringify(formData));
+
     try {
-      const response = await fetch('http://localhost:5050/api/users', {
+      const response = await fetch('http://localhost:5050/api/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: "include",
         body: JSON.stringify(formData),
       })
 
       const result = await response.json()
       console.log('Form submitted successfully:', result)
       setData(result)
+      navigate("/login")
+
     } catch (error) {
       console.error('Error submitting form:', error)
     }

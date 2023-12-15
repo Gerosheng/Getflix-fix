@@ -1,4 +1,13 @@
 import React, { createContext, useContext, useState, FC, ReactNode, useEffect } from 'react';
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 
 interface AuthContextProps {
     isAuth: Boolean;
@@ -27,7 +36,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   };
   
   return (
-    <AuthContext.Provider value={{ isAuth, getAuth, }}>
+    <AuthContext.Provider value={{ isAuth, getAuth }}>
       {children}
     </AuthContext.Provider>
   );
@@ -42,3 +51,22 @@ export const useAuth = (): AuthContextProps => {
 
   return context;
 };
+
+interface RequireAuthProps {
+  children?: ReactNode;
+}
+
+export function RequireAuth({ children }: RequireAuthProps) {
+  let auth = useAuth();
+  let location = useLocation();
+
+  if (auth.isAuth === false) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they log in, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
+}

@@ -1,6 +1,6 @@
 import express from 'express'
 import { deactivateAccount, getUserInfo, signup, updateUserInfo } from '../controllers/userController.mjs'
-import userAuthenticate from '../util/userAuthenticate.mjs'
+import {userAuthenticate} from '../util/userAuthenticate.mjs'
 
 const userRoutes = express.Router()
 

@@ -73,4 +73,4 @@ const getUserAuth = async (req, res) => {
     }
 };
 
-export default {userAuthenticate, getUserAuth};
+export {userAuthenticate, getUserAuth}

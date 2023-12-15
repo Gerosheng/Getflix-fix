@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../contexts/authContext'
 import './Login.css'
 
 const Login: React.FC = () => {
@@ -8,6 +8,9 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  
+  const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -15,11 +18,12 @@ const Login: React.FC = () => {
     try {
       setLoading(true)
 
-      const response = await fetch('http://localhost:5050/api/sessionRoutes', {
+      const response = await fetch('http://localhost:5050/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       })
 
@@ -29,15 +33,19 @@ const Login: React.FC = () => {
 
       const data = await response.json()
       console.log('Login successful. Data:', data)
+      navigate("/homepage");
       setLoginError(null)
     } catch (error) {
-      console.error('Error during login:', error.message)
+      console.error('Error during login:')
       setLoginError('Invalid email or password')
     } finally {
       setLoading(false)
     }
-  }
 
+    auth.getAuth
+
+  }
+  
   return (
     <div className="container">
       <div className="row">
@@ -54,6 +62,7 @@ const Login: React.FC = () => {
                 <div className="form-floating mb-3">
                   <input
                     type="email"
+                    name="email"
                     className="form-control"
                     id="floatingInputEmail"
                     placeholder="name@example.com"
@@ -67,6 +76,7 @@ const Login: React.FC = () => {
                 <div className="form-floating mb-3">
                   <input
                     type="password"
+                    name="password"
                     className="form-control"
                     id="floatingPassword"
                     placeholder="Password"
