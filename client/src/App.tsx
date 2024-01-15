@@ -14,18 +14,20 @@ import Welcome from './components/WelcomePage/Welcome'
 import Pay from './components/Navbar/Pay'
 import MovieDetailPage from './components/DetailPage/DetailPage'
 import TVShowDetailPage from './components/DetailPage/ShowDetailpage'
-import { useEffect, useState } from 'react'
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="*" element={<Layout />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  )
+}
 
 const Layout = () => {
   const location = useLocation()
-  const [, setMessage] = useState<string>('')
-
-  useEffect(() => {
-    // Fetch data when the Layout component mounts
-    fetch('https://viewtopia-zlcc.onrender.com')
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-  }, [])
 
   return (
     <>
@@ -45,19 +47,7 @@ const Layout = () => {
         <Route path="tvshow/:id" element={<TVShowDetailPage />} />{' '}
         {/* Ajoutez cette ligne pour la page de détails des émissions de télévision */}
       </Routes>
-      <Footer />
     </>
-  )
-}
-
-const App = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="*" element={<Layout />} />
-      </Routes>
-    </BrowserRouter>
   )
 }
 

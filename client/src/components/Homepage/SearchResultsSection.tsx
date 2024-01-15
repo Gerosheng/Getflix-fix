@@ -23,12 +23,26 @@ const SearchResultsSection: React.FC<SearchResultsSectionProps> = ({
   currentPage,
   onSearchResultClick, // Update the prop
 }) => {
+  console.log('Results:', results)
+  console.log('Search Made:', searchMade)
+  console.log('Current Page:', currentPage)
+
+  // If currentPage is not defined, display all results
+  const filteredResults = currentPage
+    ? results.filter((result) => result.type === currentPage)
+    : results
+
+  console.log('Filtered Results:', filteredResults)
+
   return (
     <div className="search-results-section">
-      {results.length > 0 ? (
+      {filteredResults.length > 0 ? (
         <Carousel>
           {results
-            .filter((result) => result.type === currentPage)
+            .filter((result) => {
+              console.log('Result Type:', result.type)
+              return result.type === currentPage
+            })
             .map((result, index) => (
               <div key={index}>
                 <Link

@@ -12,17 +12,14 @@ const PasswordPage: React.FC = () => {
     e.preventDefault()
 
     try {
-      const response = await fetch(
-        'https://viewtopia-zlcc.onrender.com/api/password',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify({ email }),
+      const response = await fetch('http://localhost:5050/api/password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+        credentials: 'include',
+        body: JSON.stringify({ email }),
+      })
 
       if (response.ok) {
         // Password recovery initiated successfully, handle success (e.g., show a success message)

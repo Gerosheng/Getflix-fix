@@ -14,9 +14,7 @@ const Signup: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'https://viewtopia-zlcc.onrender.com/api/users',
-        )
+        const response = await fetch('http://localhost:5050/api/users')
         const result = await response.json()
         setData(result)
       } catch (error) {
@@ -39,16 +37,13 @@ const Signup: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch(
-        'https://viewtopia-zlcc.onrender.com/api/users',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
+      const response = await fetch('http://localhost:5050/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+        body: JSON.stringify(formData),
+      })
 
       const result = await response.json()
       console.log('Form submitted successfully:', result)

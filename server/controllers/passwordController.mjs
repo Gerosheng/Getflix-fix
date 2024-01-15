@@ -25,7 +25,7 @@ const passwordResetRequest = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000 // token expires in 1 hour
     await user.save({ validateBeforeSave: false }) // option to bypass requirements in the model
 
-    const resetLink = `https://viewtopiafront.onrender.com/reset-password?token=${resetToken}` // adjust to actual password reset page
+    const resetLink = `http://localhost:5173/reset-password?token=${resetToken}` // adjust to actual password reset page
     const mailOptions = resetMailOptions(user.email, resetLink)
 
     transporter.sendMail(mailOptions, (error, info) => {

@@ -16,7 +16,7 @@ const TrendingPodcastSection: React.FC = () => {
     const fetchActors = async () => {
       try {
         const actorsResponse = await axios.get(
-          'https://viewtopia-zlcc.onrender.com/homepage/actors',
+          'http://localhost:5050/homepage/actors',
         )
         setPopularActors(actorsResponse.data)
       } catch (error) {

@@ -24,17 +24,17 @@ const Movies: React.FC = () => {
     const fetchData = async () => {
       try {
         const latestResponse = await axios.get(
-          'https://viewtopia-zlcc.onrender.com/movies/latest',
+          'http://localhost:5050/movies/latest',
         )
         setLatestMovies(latestResponse.data)
 
         const popularResponse = await axios.get(
-          'https://viewtopia-zlcc.onrender.com/movies/popular',
+          'http://localhost:5050/movies/popular',
         )
         setPopularMovies(popularResponse.data)
 
         const upcomingResponse = await axios.get(
-          'https://viewtopia-zlcc.onrender.com/movies/upcoming',
+          'http://localhost:5050/movies/upcoming',
         )
         setUpcomingMovies(upcomingResponse.data)
       } catch (error) {

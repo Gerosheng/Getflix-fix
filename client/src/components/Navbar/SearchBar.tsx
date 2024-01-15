@@ -15,25 +15,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   currentPage,
 }) => {
   const [query, setQuery] = useState<string>('')
-  const apiBaseUrl = 'https://viewtopia-zlcc.onrender.com/'
+  const apiBaseUrl = 'http://localhost:5050'
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    // Construct the API endpoint based on the current page
-    let apiEndpoint = ''
-    if (currentPage === 'movies') {
-      apiEndpoint = `${apiBaseUrl}/movies/searchmovie/${query}`
-    } else if (currentPage === 'series') {
-      apiEndpoint = `${apiBaseUrl}/tvshows/searchtv/${query}`
-    } else if (currentPage === 'homepage') {
-      apiEndpoint = `${apiBaseUrl}/homepage/search/${query}`
-    }
-
-    if (!apiEndpoint) {
-      console.error('Invalid current page')
-      return
-    }
+    console.log('Query:', query)
+    let apiEndpoint = `${apiBaseUrl}/homepage/search/${query}`
+    console.log('API Endpoint:', apiEndpoint)
 
     try {
       const response = await fetch(apiEndpoint, {
@@ -46,8 +35,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
       if (response.ok) {
         const data = await response.json()
 
+        console.log('Data from API:', data)
+
         if (typeof onSearchResults === 'function') {
-          onSearchResults(data, currentPage) // Pass currentPage to the callback
+          onSearchResults(data, currentPage)
         } else {
           console.error('onSearchResults is not a function')
         }
@@ -58,7 +49,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
       console.error('Error:', error)
     }
   }
-
   return (
     <form
       onSubmit={handleSearch}
