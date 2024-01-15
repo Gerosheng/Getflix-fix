@@ -15,15 +15,15 @@ const signup = async (req, res) => {
         await newUser.save();
 
         const accessToken = createAccessToken(newUser);
-
+        console.log(accessToken);
         res.cookie('jwt', accessToken, {
-            //sameSite: "None",
+            sameSite: "None",
             withCredentials: true,
             httpOnly: false, //for dev purposes change to true for prod
             maxAge: 2 * 60 * 60 * 1000 //cookie expiry: set to match aT (2Hours)
         });
-
-        responseHandler.created(res, {
+        
+        return responseHandler.created(res, {
             accessToken,
             ...newUser._doc,
             id: newUser.id

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Link, redirect } from 'react-router-dom'
-
+import { Link, useNavigate, redirect } from 'react-router-dom'
+import { useAuth } from '../../contexts/authContext'
 import './Login.css'
 
 const Login: React.FC = () => {
@@ -8,6 +8,9 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('')
   const [, setLoginError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  
+  const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -20,6 +23,7 @@ const Login: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       })
 
@@ -42,8 +46,11 @@ const Login: React.FC = () => {
     } finally {
       setLoading(false)
     }
-  }
 
+    auth.getAuth
+
+  }
+  
   return (
     <div className="container">
       <div className="row">
