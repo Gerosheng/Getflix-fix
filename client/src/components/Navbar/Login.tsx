@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
 
 import './Login.css'
 
@@ -14,7 +14,7 @@ const Login: React.FC = () => {
 
     try {
       setLoading(true)
-
+      console.log({email, password})
       const response = await fetch('http://localhost:5050/auth/login', {
         method: 'POST',
         headers: {
@@ -29,7 +29,10 @@ const Login: React.FC = () => {
 
       const data = await response.json()
       console.log('Login successful. Data:', data)
-      setLoginError(null)
+      setLoginError(null);
+      alert(`Login successful!, welcome ${data.firstname}` );
+      redirect("/homepage")
+      
     } catch (error) {
       if (error instanceof Error) {
         console.error('Error during login:', error.message)

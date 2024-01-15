@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
 import './Signup.css'
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -48,6 +48,8 @@ const Signup: React.FC = () => {
       const result = await response.json()
       console.log('Form submitted successfully:', result)
       setData(result)
+      alert(`Signing up successful!, welcome ${result.firstname}` );
+      return redirect("/homepage")
     } catch (error) {
       console.error('Error submitting form:', error)
     }
