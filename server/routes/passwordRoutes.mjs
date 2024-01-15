@@ -44,7 +44,7 @@ export default passwordRoutes;
     const newPassword = '...'; // Set the new password here or get it from user input
 
     // Make a PUT request to your server endpoint with the reset token as a parameter
-    axios.put(`http://localhost:5050/password/reset-password/${resetToken}`, {
+    axios.put(`https://viewtopia.onrender.com/password/reset-password/${resetToken}`, {
     newPassword: newPassword,
     })
     .then(response => {

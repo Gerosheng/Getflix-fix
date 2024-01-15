@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, FC, ReactNode, useEffect } from 'react';
+/**
+ * 
+ * import React, { createContext, useContext, useState, FC, ReactNode, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -21,7 +23,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const getAuth = async () => {
     try {
-      const response = await fetch('http://localhost:5050/api/auth/getauth', {
+      const response = await fetch('https://viewtopia.onrender.com/api/auth/getauth', {
         method: 'GET',
         credentials: 'include',
       });
@@ -70,3 +72,4 @@ export function RequireAuth({ children }: RequireAuthProps) {
 
   return <>{children}</>;
 }
+*/

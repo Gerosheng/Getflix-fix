@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Link, useNavigate, redirect } from 'react-router-dom'
-import { useAuth } from '../../contexts/authContext'
+import { Link, useNavigate } from 'react-router-dom'
+//import { useAuth } from '../../contexts/authContext'
 import './Login.css'
 
 const Login: React.FC = () => {
@@ -9,8 +9,8 @@ const Login: React.FC = () => {
   const [, setLoginError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   
+  //const auth = useAuth();
   const navigate = useNavigate();
-  const auth = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -18,7 +18,7 @@ const Login: React.FC = () => {
     try {
       setLoading(true)
       console.log({email, password})
-      const response = await fetch('http://localhost:5050/auth/login', {
+      const response = await fetch('https://viewtopia.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const Login: React.FC = () => {
       console.log('Login successful. Data:', data)
       setLoginError(null);
       alert(`Login successful!, welcome ${data.firstname}` );
-      redirect("/homepage")
+      navigate("/homepage")
       
     } catch (error) {
       if (error instanceof Error) {
@@ -47,7 +47,7 @@ const Login: React.FC = () => {
       setLoading(false)
     }
 
-    auth.getAuth
+    //auth.getAuth
 
   }
   

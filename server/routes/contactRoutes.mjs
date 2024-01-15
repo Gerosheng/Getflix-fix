@@ -1,7 +1,7 @@
 import Express  from "express";
 import { submitContactForm, getContactMessages, deleteContactMessage } from '../controllers/contactController.mjs'
-import userAuthenticate from '../util/userAuthenticate.mjs'
-import userAuthorisation from '../util/userAuthorisation.mjs'
+import { userAuthenticate } from '../util/userAuthenticate.mjs'
+import { userAuthorisation } from '../util/userAuthorisation.mjs'
 
 const contactRoutes = Express.Router();
 

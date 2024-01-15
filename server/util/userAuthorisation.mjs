@@ -10,4 +10,4 @@ const userAuthorisation = (auhtorizedRole) => (req, res, next) => {
     }
 };
 
-export default userAuthorisation;
+export { userAuthorisation };

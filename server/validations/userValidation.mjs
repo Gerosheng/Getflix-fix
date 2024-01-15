@@ -7,7 +7,7 @@ const lastname = Joi.string().alphanum().min(3).max(30).required()
 //const age = Joi.number().integer().min(0).max(150).required();
 
 const message =
-  'Must be between 6-16 characters, ' +
+  'Password must be between 6-16 characters, ' +
   'have at least one capital letter, ' +
   'one lowercase letter, one digit, ' +
   'and one special character'

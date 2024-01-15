@@ -73,4 +73,5 @@ const getUserAuth = async (req, res) => {
     }
 };
 
-export {userAuthenticate, getUserAuth}
+export { userAuthenticate, 
+    getUserAuth}

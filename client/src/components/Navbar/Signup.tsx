@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, redirect } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import './Signup.css'
 const Signup: React.FC = () => {
@@ -9,22 +9,9 @@ const Signup: React.FC = () => {
     email: '',
     password: '',
   })
-  const navigate = useNavigate();
   const [data, setData] = useState<any>(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5050/api/users/signup')
-        const result = await response.json()
-        setData(result)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
-    }
-
-    fetchData()
-  }, [])
+  const navigate = useNavigate();
 
   console.log('Data:', data)
 
@@ -41,7 +28,7 @@ const Signup: React.FC = () => {
     console.log('Request Payload:', JSON.stringify(formData));
 
     try {
-      const response = await fetch('http://localhost:5050/api/users/signup', {
+      const response = await fetch('https://viewtopia.onrender.com/api/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,16 +36,20 @@ const Signup: React.FC = () => {
         credentials: "include",
         body: JSON.stringify(formData),
       })
-
       const result = await response.json()
-      console.log('Form submitted successfully:', result)
-      setData(result)
-      alert(`Signing up successful!, welcome ${result.firstname}` );
-      return redirect("/homepage")
+      if (response.ok) {
+        console.log('Form submitted successfully:', result);
+        setData(result);
+        alert(`Signing up successful!, welcome ${result.firstname}` );
+        navigate('/homepage');
+      } else {
+        return alert(`Signing up failed: ${result.message}`)
+      }
     } catch (error) {
       console.error('Error submitting form:', error)
     }
   }
+  
 
   return (
     <div className="container">
