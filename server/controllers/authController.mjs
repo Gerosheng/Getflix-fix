@@ -6,7 +6,9 @@ import responseHandler from '../util/handlers/responseHandlers.mjs'
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body
+    const { email, password } = req.body;
+    
+    console.log( { email, password })
 
     await signInValidation.validateAsync({ email, password })
 

@@ -37,7 +37,7 @@ const passwordResetRequest = async (req, res) => {
       responseHandler.ok(res, info)
     })
   } catch (error) {
-    responseHandler.valError(res, parseError)
+    responseHandler.valError(res, parseError(err))
   }
 }
 
@@ -71,7 +71,7 @@ const passwordReset = async (req, res) => {
     responseHandler.ok(res, user.password)
   } catch (error) {
     console.error(error)
-    responseHandler.valError(res, parseError)
+    responseHandler.valError(res, parseError(err))
   }
 }
 

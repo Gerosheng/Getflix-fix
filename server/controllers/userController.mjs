@@ -7,7 +7,7 @@ import { parseError } from '../util/helpers.mjs';
 const signup = async (req, res) => {
     try {
         const { firstname, lastname, email, password } = req.body;
-
+        console.log( {firstname, lastname, email, password})
         await signUpValidation.validateAsync({firstname, lastname, email, password });
 
         const newUser = new User({ firstname, lastname, email, password, role: 'registrant' });
@@ -19,7 +19,7 @@ const signup = async (req, res) => {
         res.cookie('jwt', accessToken, {
             //sameSite: "None",
             withCredentials: true,
-            httpOnly: true, //for dev purposes change to true for prod
+            httpOnly: false, //for dev purposes change to true for prod
             maxAge: 2 * 60 * 60 * 1000 //cookie expiry: set to match aT (2Hours)
         });
 
@@ -30,7 +30,7 @@ const signup = async (req, res) => {
         });
 
     } catch (err) {
-        responseHandler.valError(res, parseError);
+        responseHandler.valError(res, parseError(err));
     };
 };
 
@@ -62,7 +62,7 @@ const updateUserInfo = async (req, res) => {
         responseHandler.ok(res);
 
     } catch (err) {
-        responseHandler.valError(res, parseError);
+        responseHandler.valError(res, parseError(err));
     }
     
 }

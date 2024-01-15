@@ -25,7 +25,7 @@ const submitContactForm = async (req, res) => {
 
         responseHandler.created(res, contact)
     } catch (err) {
-        responseHandler.error(res, parseError)
+        responseHandler.error(res, parseError(err))
     }
 };
 

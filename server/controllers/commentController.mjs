@@ -46,7 +46,7 @@ const createComment = async (req, res) => {
         responseHandler.created(res);
         
     } catch (error){ 
-        responseHandler.valError(res, parseError);
+        responseHandler.valError(res, parseError(err));
     };
 }; 
 
