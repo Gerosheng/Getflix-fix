@@ -37,7 +37,7 @@ const Signup: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:5050/api/users', {
+      const response = await fetch('http://localhost:5050/api/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

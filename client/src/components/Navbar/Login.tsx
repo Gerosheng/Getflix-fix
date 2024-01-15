@@ -15,7 +15,7 @@ const Login: React.FC = () => {
     try {
       setLoading(true)
 
-      const response = await fetch('http://localhost:5050/api/sessionRoutes', {
+      const response = await fetch('http://localhost:5050/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,6 +57,7 @@ const Login: React.FC = () => {
                 <div className="form-floating mb-3">
                   <input
                     type="email"
+                    name="email"
                     className="form-control"
                     id="floatingInputEmail"
                     placeholder="name@example.com"
@@ -70,6 +71,7 @@ const Login: React.FC = () => {
                 <div className="form-floating mb-3">
                   <input
                     type="password"
+                    name="password"
                     className="form-control"
                     id="floatingPassword"
                     placeholder="Password"
