@@ -12,7 +12,7 @@ const PasswordPage: React.FC = () => {
     e.preventDefault()
 
     try {
-      const response = await fetch('http://localhost:5050/api/password', {
+      const response = await fetch('https://viewtopia.onrender.com/api/password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

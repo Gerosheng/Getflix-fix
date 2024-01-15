@@ -27,12 +27,12 @@ const HeroSection: React.FC = () => {
       try {
         
         const ontheairResponse = await axios.get(
-          'http://localhost:5050/homepage/ontheair',
+          'https://viewtopia.onrender.com/homepage/ontheair',
         )
         setOntheair(ontheairResponse.data)
 
         const latestResponse = await axios.get(
-          'http://localhost:5050/movies/latest',
+          'https://viewtopia.onrender.com/movies/latest',
         )
         setLatestMovies(latestResponse.data)
       } catch (error) {

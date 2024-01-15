@@ -27,7 +27,7 @@ const TVShowDetailPage: React.FC = () => {
   useEffect(() => {
     const fetchContentDetails = async () => {
       try {
-        const endpoint = `http://localhost:5050/tvshows/details/${id}`
+        const endpoint = `https://viewtopia.onrender.com/tvshows/details/${id}`
         const response = await axios.get<TVShowDetail>(endpoint)
         setContentDetails(response.data)
       } catch (error) {

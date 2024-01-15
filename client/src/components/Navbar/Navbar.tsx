@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
             <SearchBar
               onSearchResults={handleSearch}
               currentPage={currentPage}
-              apiBaseUrl={'http://localhost:5050'} // Replace with your actual API base URL
+              apiBaseUrl={'https://viewtopia.onrender.com'} // Replace with your actual API base URL
             />
             <button
               className="navbar-toggler"

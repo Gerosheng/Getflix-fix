@@ -25,17 +25,17 @@ const TvShows: React.FC = () => {
     const fetchData = async () => {
       try {
         const topratedResponse = await axios.get(
-          'http://localhost:5050/tvshows/toprated',
+          'https://viewtopia.onrender.com/tvshows/toprated',
         )
         setToprated(topratedResponse.data)
 
         const popularResponse = await axios.get(
-          'http://localhost:5050/tvshows/popular',
+          'https://viewtopia.onrender.com/tvshows/popular',
         )
         setPopular(popularResponse.data)
 
         const airingtodayResponse = await axios.get(
-          'http://localhost:5050/tvshows/airingtoday',
+          'https://viewtopia.onrender.com/tvshows/airingtoday',
         )
         setAiringToday(airingtodayResponse.data)
       } catch (error) {

@@ -15,7 +15,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   currentPage,
 }) => {
   const [query, setQuery] = useState<string>('')
-  const apiBaseUrl = 'http://localhost:5050'
+  const apiBaseUrl = 'https://viewtopia.onrender.com'
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
