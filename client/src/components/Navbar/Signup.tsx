@@ -39,7 +39,9 @@ const Signup: React.FC = () => {
     try {
       const response = await fetch('http://localhost:5050/api/users/signup', {
         method: 'POST',
+        credentials: "include",
         headers: {
+          'accept':'*/*',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),

@@ -17,7 +17,9 @@ const Login: React.FC = () => {
 
       const response = await fetch('http://localhost:5050/auth/login', {
         method: 'POST',
+        credentials: 'include',
         headers: {
+          'accept': '*/*',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
